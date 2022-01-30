@@ -92,7 +92,7 @@ def main():
 
 
     '''----------开始训练------------'''
-    epochs = 5
+    epochs = 10
     best_acc = 0.0
     save_path = './{}Net.pth'.format(model_name)
     train_steps = len(train_loader)
@@ -120,6 +120,7 @@ def main():
                                                                      loss)
         loss_list.append(loss)
 
+
         # validate
         net.eval()
         acc = 0.0  # accumulate accurate number / epoch
@@ -140,6 +141,8 @@ def main():
         if val_accurate > best_acc:
             best_acc = val_accurate
             torch.save(net.state_dict(), save_path)
+
+            
 
     print("Fnished Training")
     plt.figure(1)
