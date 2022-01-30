@@ -1,5 +1,4 @@
-from select import KQ_NOTE_RENAME
-from statistics import mode
+
 import torch.nn as nn
 import torch
 
@@ -23,14 +22,15 @@ class VGG(nn.Module):
     def __init__(self, features, num_classes = 1000, init_weights = False):
         super(VGG, self).__init__()
         self.features = features
+        # 全连接层2048太大了，显存不够，改成512
         self.classifier = nn.Sequential(
-            nn.Linear(512*7*7, 2048),
+            nn.Linear(512*7*7, 512),
             nn.ReLU(True),
             nn.Dropout(p=0.5),
-            nn.Linear(2048, 2048),
+            nn.Linear(512, 512),
             nn.ReLU(True),
             nn.Dropout(p=0.5),
-            nn.Linear(2048, num_classes)
+            nn.Linear(512, num_classes)
         )
         if init_weights:
             self._initialize_weights()
