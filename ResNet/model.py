@@ -173,7 +173,8 @@ def resnet101(num_classes=1000, include_top=True):
     # https://download.pytorch.org/models/resnet101-5d3b4d8f.pth
     return ResNet(Bottleneck, [3, 4, 23, 3], num_classes=num_classes, include_top=include_top)
 
-# 后边这俩区别于前边，可以每一个batch进行预测。
+
+# 后边这俩区别于前边，ResNeXt网络，加上了组卷积的概念，减少了参数量
 def resnext50_32x4d(num_classes=1000, include_top=True):
     # https://download.pytorch.org/models/resnext50_32x4d-7cdf4587.pth
     groups = 32
